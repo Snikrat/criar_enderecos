@@ -17,22 +17,22 @@ workbook = openpyxl.load_workbook('planilha_para_enderecos.xlsx', data_only=True
 sheet_enderecamento = workbook['Endereçamento']
 
 # Diretório onde o script está localizado
-diretorio_atual = Path(__file__).parent  # Caminho base do script
+#diretorio_atual = Path(__file__).parent  # Caminho base do script
 
 # Caminho para as imagens
-img_caminho_inicio = diretorio_atual / 'img' / 'inicio.png'
-img_caminho_cadastro = diretorio_atual / 'img' / 'cadastros.png'
-img_caminho_logistica = diretorio_atual / 'img' / 'logisticas.png'
-img_caminho_enderecamentos = diretorio_atual / 'img' / 'enderecamentos.png'
-img_caminho_salvar = diretorio_atual / 'img' / 'salvar.png'
-img_caminho_novo = diretorio_atual / 'img' / 'novo.png'
+img_caminho_inicio = r'C:\Users\img/inicio.png'
+img_caminho_cadastro = r'C:\Users\img/cadastros.png'
+img_caminho_logistica = r'C:\Users\img/logisticas.png'
+img_caminho_enderecamentos = r'C:\Users\img/enderecamentos.png'
+img_caminho_salvar = r'C:\Users\img/salvar.png'
+img_caminho_novo = r'C:\Users\img/novo.png'
 
 
 
 # Verificando se as imagens existem antes de usá-las
-for img in [img_caminho_inicio, img_caminho_cadastro, img_caminho_logistica, img_caminho_enderecamentos]:
-    if not img.exists():
-        raise FileNotFoundError(f"A imagem {img} não foi encontrada!")
+#for img in [img_caminho_inicio, img_caminho_cadastro, img_caminho_logistica, img_caminho_enderecamentos]:
+ #   if not img.exists():
+  #      raise FileNotFoundError(f"A imagem {img} não foi encontrada!")
 
 def iniciar_script():
     global script_rodando
@@ -80,11 +80,11 @@ def iniciar_script():
 
 
             def digitar_campos_enderecos():
-                log("o Script sera iniciado, pressione 'Ctrl + p' para encerrar.\n")
+                log("o Script sera iniciado.\n")
 
                 # Encontra a última linha com dados na coluna A
                 ultima_linha_com_dados = None
-                log('Processando tota de linhas...')
+                log('Processando total de linhas...')
                 # Itera de baixo para cima na coluna A
                 for linha in reversed(list(sheet_enderecamento.iter_rows(min_col=1, max_col=1))):
                     if linha[0].value is not None and str(linha[0].value).strip() != "":  # Verifica se não está vazio
@@ -120,21 +120,25 @@ def iniciar_script():
                         time.sleep(0.1)
                         # Fileira
                         fileira = linha[0].value
+                        fileira = str(fileira)
                         pyautogui.typewrite(fileira)
                         pyautogui.hotkey('tab')
                         time.sleep(0.1)
                         # Coluna
                         coluna = linha[1].value
+                        coluna = str(coluna)
                         pyautogui.typewrite(coluna)
                         pyautogui.hotkey('tab')
                         time.sleep(0.1)
                         # Andar
                         andar = linha[2].value
+                        andar = str(andar)
                         pyautogui.typewrite(andar)
                         pyautogui.hotkey('tab')
                         time.sleep(0.1)
                         # Posição
                         posicao = linha[3].value
+                        posicao = str(posicao)
                         pyautogui.typewrite(posicao)
                         pyautogui.hotkey('tab')
                         time.sleep(0.1)
@@ -194,16 +198,16 @@ def iniciar_script():
                         salvar = pyautogui.locateCenterOnScreen(str(img_caminho_salvar), confidence=0.5)
                         pyautogui.click(salvar.x, salvar.y)
                         pyautogui.click(salvar.x, salvar.y)
-                        time.sleep(0.3)
+                        time.sleep(0.7)
                         pyautogui.hotkey('enter')
                         time.sleep(0.2)
 
                         # Iniciar nova linha
-                        time.sleep(0.2)
-                        novo = pyautogui.locateCenterOnScreen(str(img_caminho_novo), confidence=0.6)
+                        time.sleep(0.5)
+                        novo = pyautogui.locateCenterOnScreen(str(img_caminho_novo), confidence=0.7)
                         pyautogui.click(novo.x, novo.y)
                         pyautogui.click(novo.x, novo.y)
-                        time.sleep(0.1)
+                        time.sleep(0.5)
 
                     # Interrompe o loop se ocorrer um erro
                     except:

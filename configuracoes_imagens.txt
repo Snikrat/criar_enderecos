@@ -1,0 +1,8 @@
+imagem de Início: C:/Users/felip/Desktop/scripts-py/Criar-enderecos/img/inicio.png
+imagem de Menu-Cadastro: C:/Users/felip/Desktop/scripts-py/Criar-enderecos/img/cadastros.png
+imagem de Menu-Logística: C:/Users/felip/Desktop/scripts-py/Criar-enderecos/img/logisticas.png
+imagem Menu-Enderecamentos: C:/Users/felip/Desktop/scripts-py/Criar-enderecos/img/enderecamentos.png
+imagem Icone-Salvar: C:/Users/felip/Desktop/scripts-py/Criar-enderecos/img/salvar.png
+imagem Icone-Novo: C:/Users/felip/Desktop/scripts-py/Criar-enderecos/img/novo.png
+imagem Confirmação: 
+Selecione a planilha: C:/Users/felip/Desktop/scripts-py/Criar-enderecos/planilhas/planilha_para_enderecos.xlsx

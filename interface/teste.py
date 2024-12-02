@@ -1,0 +1,1 @@
+from PIL import Image; Image.open(r"C:\Users\felip\Desktop\scripts-py\Criar-enderecos\img\icon.png").resize((32, 32), Image.Resampling.LANCZOS).save(r"C:\Users\felip\Desktop\scripts-py\Criar-enderecos\img\icon_32x32.png")

@@ -15,8 +15,11 @@ def criar_log(janela):
 
 # Função de log (para inserir mensagens)
 def log(msg, text_log):
-    text_log.config(state=tk.NORMAL)
-    text_log.insert(tk.END, f"{msg}\n")
-    text_log.yview(tk.END)  
-    text_log.config(state=tk.DISABLED)
+    def atualizar_log():
+        text_log.config(state=tk.NORMAL)
+        text_log.insert(tk.END, f"{msg}\n")
+        text_log.yview(tk.END)
+        text_log.config(state=tk.DISABLED)
+    text_log.after(0, atualizar_log)
+
 

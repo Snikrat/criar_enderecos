@@ -1,0 +1,14 @@
+{
+    "imagens": {
+        "img_caminho_inicio": "C:/Users/img/inicio.png",
+        "img_caminho_cadastro": "C:/Users/Felippe Gonçalves/Desktop/scripts/criar_enderecos/img/cadastros.png",
+        "img_caminho_logistica": "C:/Users/Felippe Gonçalves/Desktop/scripts/criar_enderecos/img/logisticas.png",
+        "img_caminho_enderecamentos": "C:/Users/Felippe Gonçalves/Desktop/scripts/criar_enderecos/img/enderecamentos.png",
+        "img_caminho_salvar": "C:/Users/Felippe Gonçalves/Desktop/scripts/criar_enderecos/img/salvar.png",
+        "img_caminho_novo": "C:/Users/Felippe Gonçalves/Desktop/scripts/criar_enderecos/img/salvar.png",
+        "img_caminho_confirmacao": "C:/Users/img/confirmacao.png"
+    },
+    "planilhas": {
+        "caminho_planilha": "C:/Users/Felippe Gonçalves/Desktop/scripts/criar_enderecos/planilha_para_enderecos.xlsx"
+    }
+}

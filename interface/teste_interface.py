@@ -1,36 +1,58 @@
+# -*- coding: utf-8 -*-
 import sys
 import os
 # Adiciona o diretório raiz do projeto ao PYTHONPATH
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import tkinter as tk
 import ttkbootstrap as ttk
+import ttkbootstrap as Window
+import threading
 from PIL import Image, ImageTk
 from interface_configuracoes import abrir_configuracoes 
 from log import *
-from scripts.criar_c import *
-from scripts.teste_script import *
+from scripts.script_criar_enderecos import *
 
 
 # Janela princippal
 def iniciar_interface():
     janela = ttk.Window(themename="darkly")
     janela.title("Criar Endereços")
-    janela.geometry("600x400")
+
+    largura_janela = 600
+    altura_janela = 400
+
+    # Obter largura e altura da tela
+    largura_tela = janela.winfo_screenwidth()
+    altura_tela = janela.winfo_screenheight()
+
+    # Calcular posição X e Y para centralizar a janela
+    pos_x = (largura_tela - largura_janela) // 2
+    pos_y = (altura_tela - altura_janela) // 2
+
+    # Configurar tamanho e posição da janela
+    janela.geometry(f"{largura_janela}x{altura_janela}+{pos_x}+{pos_y}")
     janela.resizable(False, False)
     
+    # Adicionar ícone na janela
+    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+    diretorio_pasta_raiz = os.path.dirname(os.path.dirname(diretorio_atual)) 
+    icon_configuracoes_janela = os.path.join(diretorio_pasta_raiz, 'criar_enderecos', 'src', 'icon_32x32.png')
+    janela.tk.call('wm', 'iconphoto', janela._w, ImageTk.PhotoImage(Image.open(icon_configuracoes_janela)))
+
+
     # Adiciona os botões definidos em buttons.py
     criar_botoes(janela)
 
-    # Adicionar ícone na janela
-    icon_configuracoes_janela = r"C:\Users\felip\Desktop\scripts-py\Criar-enderecos\img\icon_32x32.png"
-    janela.iconphoto(True, ImageTk.PhotoImage(Image.open(icon_configuracoes_janela)))
+    
 
     # Iniciar o loop da janela
     janela.mainloop()
 
 def icon_config(janela):
   # Caminho do icon config
-    icon_configuracoes = r"C:\Users\felip\Desktop\scripts-py\Criar-enderecos\img\gear.png"  
+    diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+    diretorio_pasta_raiz = os.path.dirname(os.path.dirname(diretorio_atual)) 
+    icon_configuracoes = os.path.join(diretorio_pasta_raiz, 'criar_enderecos', 'src', 'gear.png')
 
     # Redimensionar icon config
     tamanho_novo = (22, 22)  # Ajuste para o tamanho desejado
@@ -51,15 +73,16 @@ def icon_config(janela):
 
 # Botoes
 def criar_botoes(janela):
-    # Centralizando os botões na janela com uma largura fixa
+    
+    # Centralizando os botões 
     frame_botoes = tk.Frame(janela)
-    frame_botoes.pack(expand=True)  # 'expand=True' centraliza o frame na janela
+    frame_botoes.pack(expand=True) 
 
-    # Configura a grid para garantir que todas as colunas e linhas tenham o mesmo tamanho
-    frame_botoes.grid_columnconfigure(0, weight=1)  # Aumenta a largura da coluna
-    frame_botoes.grid_rowconfigure(0, weight=1)  # Aumenta a altura da linha
-    frame_botoes.grid_rowconfigure(1, weight=1)  # Aumenta a altura da linha
-    frame_botoes.grid_rowconfigure(2, weight=1)  # Aumenta a altura da linha
+    # Configurar grid 
+    frame_botoes.grid_columnconfigure(0, weight=1)
+    frame_botoes.grid_rowconfigure(0, weight=1) 
+    frame_botoes.grid_rowconfigure(1, weight=1)  
+    frame_botoes.grid_rowconfigure(2, weight=1)  
 
     icon_config(janela)
 
@@ -110,7 +133,9 @@ def voltar_para_principal(janela):
 
 def voltar(janela):
     # Caminho do icon config
-        icon_arrow = r"C:\Users\felip\Desktop\scripts-py\Criar-enderecos\img\arrow.png"  # Substitua pelo caminho correto do arquivo de imagem
+        diretorio_atual = os.path.dirname(os.path.abspath(__file__))
+        diretorio_pasta_raiz = os.path.dirname(os.path.dirname(diretorio_atual)) 
+        icon_arrow = os.path.join(diretorio_pasta_raiz, 'criar_enderecos', 'src', 'arrow.png')
         # Redimensionar icon config
         tamanho_novo = (22, 22)  # Ajuste para o tamanho desejado
         imagem_original = Image.open(icon_arrow)
@@ -155,7 +180,11 @@ def interface_criar_enderecos(janela):
         frame_botoes, 
         text="Iniciar Script", 
         bootstyle="success",
-        command=lambda: executar_script_criar_enderecos(text_log)
+        command=lambda: threading.Thread(
+        target=iniciar_script_criar_enderecos, 
+        args=(text_log,), 
+        daemon=True
+    ).start()
         )
     iniciar_criar_enderecos.grid(
         row=0, 
